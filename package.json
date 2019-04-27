@@ -1,0 +1,17 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "What is tetris and how to make it two player",
+  "main": "Tetris.js",
+  "scripts": {
+    "live": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Otter",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.11",
+    "socket.io": "^2.2.0"
+  }
+}

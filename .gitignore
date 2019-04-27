@@ -1,0 +1,7 @@
+.DS_Store
+favicon.ico
+package-lock.json
+
+
+/favicon
+/node_modules
