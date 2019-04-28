@@ -59,7 +59,6 @@ function randomPiece(){
     usedPieces = [];
   }
 
-  console.log(availablePieces);
   var r = availablePieces[0];
   usedPieces.push(r);
   availablePieces.shift();
@@ -98,15 +97,70 @@ Piece.prototype.undraw = function () {
 }
 
 Piece.prototype.moveLeft = function () {
-  this.undraw();
-  this.x--;
-  this.draw();
+  if(!this.collision(-1, 0, this.active)){
+    this.undraw();
+    this.x--;
+    this.draw();
+  }
 }
 
 Piece.prototype.moveRight = function () {
+  if(!this.collision(1, 0, this.active)){
+    this.undraw();
+    this.x++;
+    this.draw();
+  }
+}
+
+Piece.prototype.moveDown = function () {
   this.undraw();
-  this.x++;
+  this.y++;
   this.draw();
+}
+
+Piece.prototype.moveUp = function () {
+  this.undraw();
+  this.y--;
+  this.draw();
+}
+
+Piece.prototype.collision = function(x,y,piece){
+    for( r = 0; r < piece.length; r++){
+        for(c = 0; c < piece.length; c++){
+            if(!piece[r][c]){
+                continue;
+            }
+
+            let newX = this.x + c + x;
+            let newY = this.y + r + y;
+
+            if(newX < 0 || newX >= COL || newY >= ROW){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+Piece.prototype.rotateRight = function () {
+  var nextPattern = this.shape[(this.shapeN + 1) % this.shape.length];
+  console.log("Rrot " + this.shapeN + " " + this.nextPattern);
+  this.undraw();
+  this.shapeN = (this.shapeN + 1) % this.shape.length;
+  this.active = this.shape[this.shapeN];
+  this.draw();
+
+}
+
+Piece.prototype.rotateLeft = function() {
+  var prevPattern = (this.shapeN == 0) ? this.shape[this.shape.length] : this.shape[(this.shapeN - 1) % this.shape.length];
+  console.log("Lrot " + this.shapeN + " " + this.prevPattern);
+
+  this.undraw();
+  this.shapeN = (this.shapeN == 0) ? this.shape.length : (this.shapeN - 1) % this.shape.length;
+  this.active = this.shape[this.shapeN];
+  this.draw();
+
 }
 
 Piece.prototype.debugNewPiece = function () {
@@ -120,10 +174,18 @@ p.draw();
 document.addEventListener("keydown", CONTROL);
 function CONTROL(event){
     if(event.keyCode == 37) {
-        p.moveLeft();
+      p.moveLeft();
+    }else if(event.keyCode == 38) {
+      p.moveUp();
     }else if(event.keyCode == 39) {
-        p.moveRight();
+      p.moveRight();
+    }else if(event.keyCode == 40){
+      p.moveDown();
     }else if(event.keyCode == 67) {
-        p.debugNewPiece();
+      p.debugNewPiece();
+    }else if(event.keyCode == 81) {
+      p.rotateLeft();
+    }else if(event.keyCode == 69) {
+      p.rotateRight();
     }
 }
