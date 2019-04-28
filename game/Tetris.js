@@ -157,7 +157,7 @@ Piece.prototype.rotateLeft = function() {
   console.log("Lrot " + this.shapeN + " " + this.prevPattern);
 
   this.undraw();
-  this.shapeN = (this.shapeN == 0) ? this.shape.length : (this.shapeN - 1) % this.shape.length;
+  this.shapeN = (this.shapeN == 0) ? this.shape.length - 1 : (this.shapeN - 1) % this.shape.length;
   this.active = this.shape[this.shapeN];
   this.draw();
 
@@ -172,6 +172,8 @@ Piece.prototype.debugNewPiece = function () {
 p.draw();
 
 document.addEventListener("keydown", CONTROL);
+
+
 function CONTROL(event){
     if(event.keyCode == 37) {
       p.moveLeft();
