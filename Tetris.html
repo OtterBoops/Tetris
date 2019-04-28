@@ -5,22 +5,38 @@
 
   <title>Tetris</title>
 
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+  </script>
+
+
   <style>
     body {
-      height: 100vh;
-      padding: 0px;
-      margin: 0px;
+      height: 100%;
+      margin: 0;
+      box-sizing: border-box;
     }
 
     .wrapper {
-      width: 40%;
+      width: 95%;
       height: 90%;
       margin: 20px auto auto;
       border: 1px solid black;
+      display: flex;
+      justify-content: space-around;
     }
 
-    #tetris {
+    .playarea {
+      display: flex;
+      width: 30%;
       border: 1px solid black;
+      justify-content: center;
+    }
+
+    canvas {
+      margin-top: 150px;
+      align-self: flex-end;
     }
   </style>
 
@@ -28,7 +44,12 @@
 <body>
 
   <div class="wrapper">
-    <canvas id="tetris" width="200" height="400"></canvas>
+    <div class="playarea">
+      <canvas id="tetris" width="200" height="400"></canvas>
+    </div>
+    <div class="playarea">
+      <canvas id="tetris2" width="200" height="400"></canvas>
+    </div>
   </div>
 <script src="game/Shape.js"></script>
 <script src="game/Tetris.js"></script>
