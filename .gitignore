@@ -3,5 +3,6 @@ favicon.ico
 package-lock.json
 
 
+/old
 /favicon
 /node_modules

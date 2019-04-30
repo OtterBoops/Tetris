@@ -20,9 +20,9 @@ app.get('/', function(request, response) {
 // Starts the server.
 
 io.on('connection', function(socket){
-  console.log('User Connected');
+  console.log('User Connected - ' + socket.request.connection.remoteAddress);
   socket.on('disconnect', function(){
-    console.log('User Disconnected');
+    console.log('User Disconnected - ' + socket.request.connection.remoteAddress);
   });
 });
 
